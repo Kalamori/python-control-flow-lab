@@ -1,4 +1,4 @@
-"""Welcome to the Python Control Flow Lab! In this lab, you’ll practice implementing control flow in Python, which includes making decisions with conditional statements, repeating actions with loops, and managing user input.
+"""Welcome to the Python Control Flow Lab! In this lab, you'll practice implementing control flow in Python, which includes making decisions with conditional statements, repeating actions with loops, and managing user input.
 
 By the end of this lab, you will be able to:
 
@@ -160,18 +160,17 @@ calculate_dog_years()"""
 # Hints:
 # - Use logical operators (`AND`, `OR`, `NOT`) in your if statements to handle multiple conditions.
 
-def weather_advice():
+"""def weather_advice():
     # Your control flow logic goes here
-    """try:
         weather_condition_cold = input('Please enter if it is cold (yes or no): ').lower()
 
-        if weather_condition_cold not in ['yes' or 'no']:
+        if weather_condition_cold not in ['yes', 'no']:
             print("Invalid Data. Please provide a 'yes' or 'no' answer.")
             return
         
         weather_condition_rain = input('Please enter if it is raining (yes or no): ').lower()
 
-        if weather_condition_rain not in ['yes' or 'no']:
+        if weather_condition_rain not in ['yes', 'no']:
             print("Invalid Data. Please provide a 'yes' or 'no' answer.")
             return
         
@@ -187,11 +186,9 @@ def weather_advice():
         elif weather_condition_cold == 'no' and weather_condition_rain == 'no':
             print("Wear light clothing.")
         
-    except ValueError:
-        print("Invalid Data. Please type a numerical value.")"""
     
 # Call the function
-weather_advice()
+weather_advice()"""
 
 # Exercise 5: What's the Season?
 #
@@ -212,18 +209,44 @@ weather_advice()
 # - Adjust the season based on the day of the month when needed.
 # - Ensure to validate input formats and handle unexpected inputs gracefully.
 
-def determine_season():
+"""def determine_season():
     # Your control flow logic goes here
-    month = input('Please enter the month of the year (Jan - Dec):').lower()
+    months = {
+        'jan': 1, 'feb': 2, 'mar': 3,
+        'apr': 4, 'may':5, 'jun': 6,
+        'jul': 7, 'aug': 8, 'sep': 9,
+        'oct': 10, 'nov': 11, 'dec': 12 
+    }
+
+    month = input('Please enter the month of the year (Jan - Dec):').strip().lower()
     
-    if month != ['','','',]:
-        print("Invalid Data. Please provide a three character answer.")
+    if month not in months:
+        print("Invalid Data. Please provide a three character answer for dates (e.g Jan).")
         return
     
-    day = input('Enter the day of the month: ')
+    day = int(input('Enter the day of the month: '))
+    
+    if day < 1 or day > 31:
+        print('Invalid Data. Please provide a single numerical entry for date between 1 and 31.')
+        return
+    
+    if (month == 'dec' and day >= 21) or (month in ['jan', 'feb']) or (month == 'mar' and day <= 19):
+        season = 'Winter'
+        
+    elif (month == 'mar' and day >= 20) or (month in ['apr', 'may']) or (month == 'jun' and day <= 20):
+        season = 'Spring'
+
+    elif (month == 'jun' and day >= 21) or (month in ['july', 'aug']) or (month == 'sep' and day <= 21):
+        season = 'Summer'
+
+    elif (month == 'sep' and day >= 22) or (month in ['oct', 'nov']) or (month == 'dec' and day <= 20):
+        season = 'Fall'
+        
+    print(f"{month} {day} is in {season}.")
+    
 
 # Call the function
-determine_season()
+determine_season()"""
 
 # Exercise 6: Number Guessing Game
 #
@@ -243,11 +266,34 @@ determine_season()
 # - Use a for loop with a range to limit guesses to five.
 # - Use logical AND, OR, and NOT to check conditions and provide appropriate feedback.
 
-def guess_number():
+"""def guess_number():
     # Your control flow logic goes here
+    fixed_num = 42
+    max_attempts = 5
 
+    for attempt in range(1, max_attempts + 1):
+        try:    
+         guess = int(input('Guess a number between 1 - 100: ').strip())
+        except ValueError:
+         print('Invalid Input. Please enter a number')
+         continue
+    
+        if not (1 <= guess <= 100):
+         print('Invalid Data. Please enter a number between 1 - 100.')
+         continue
+        
+        if guess == fixed_num:
+         print(f"Congratulations, you guessed {fixed_num} correctly in {attempt}'s tries! 🎉")
+         return
+        elif guess < fixed_num:
+         print("Guess is too low!")
+        else:
+         print("Guess is too high!")
+
+    print(f"Sorry, you failed to guess the number {fixed_num} in {max_attempts} tries.")
+    
 # Call the function
-guess_number()
+guess_number()"""
 
 
 
